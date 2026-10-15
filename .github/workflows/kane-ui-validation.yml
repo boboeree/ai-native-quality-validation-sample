@@ -1,0 +1,69 @@
+name: Kane UI suite proof
+
+on:
+  push:
+    branches: [qa/actions-proof-20261015]
+    paths:
+      - '.github/workflows/kane-ui-validation.yml'
+      - 'tests/ci/**'
+      - 'tests/codex-pr1/**'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: kane-ui-proof-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  replay:
+    name: Replay 2 cached UI tests and verify upload
+    runs-on: ubuntu-24.04
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install pinned Kane CLI and verify Chrome
+        run: |
+          npm install -g @testmuai/kane-cli@0.8.23
+          test "$(kane-cli --version)" = "0.8.23"
+          google-chrome --version
+      - name: Select exactly the committed two-test suite
+        run: |
+          mkdir -p ci-results
+          kane-cli testrun run tests/codex-pr1/budget-threshold_test.md tests/codex-pr1/pagination-reset_test.md --parallel 1 --dry-run --agent > ci-results/plan.ndjson
+          kane-cli config project 01M4Z35ACC422PBAYF8WTX10HF
+          kane-cli config folder 01M4Z36KFEZDKWBKS41WJYWFSF
+      - name: Run cached suite (credentials available only to this step)
+        id: execute
+        env:
+          LT_USERNAME: ${{ secrets.LT_USERNAME }}
+          LT_ACCESS_KEY: ${{ secrets.LT_ACCESS_KEY }}
+          KANE_CLI_CDP_TIMEOUT_MS: '60000'
+          KANE_CLI_CDP_RETRIES: '2'
+        run: python3 tests/ci/run_kane_suite.py
+      - name: Publish separate execution and upload results
+        if: always()
+        run: python3 tests/ci/report_kane_suite.py
+      - name: Keep logs, machine result, and sealed evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: kane-ui-proof-${{ github.run_id }}-${{ github.run_attempt }}
+          retention-days: 7
+          if-no-files-found: warn
+          include-hidden-files: true
+          path: |
+            ci-results/
+            .testmuai/evidence/*.evidence
+      - name: Gate on actual test completion and results
+        if: always()
+        run: python3 tests/ci/report_kane_suite.py --gate tests
+      - name: Gate on Test Manager evidence upload independently
+        if: always()
+        run: python3 tests/ci/report_kane_suite.py --gate upload
