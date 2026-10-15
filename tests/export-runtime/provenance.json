@@ -1,0 +1,14 @@
+{
+  "origin": "existing CLI export for TC-6, Verify Property Listings by Price Category",
+  "source_dir": "existing original CLI export: budget-filter-max-price-42178/Filter-Budget-Under-150/output-filter-properties-by-budget-and",
+  "files": {
+    "python/requirements.txt": "77c9cfcf091ef41140b6132efcaa1357d0cd5fcb028395eed8d742583c7dccb0",
+    "python/test.py": "0c58262cee5f222eca5cb8f374a3dd32f8ae904f265c23166e0b92094921406c",
+    "python/.env.example": "a7f0ab2eb32c54b64387c2d3cf6de2819c8791c27d1d47ddab6efb46362b1362",
+    "javascript/test.js": "318d892a867dcdc8a158f46f6de99d1b9ed406e1f80c0ee91a3a05ea17c5332b",
+    "javascript/package.json": "6efebf2a615b3f8e1d8ddffdc0805d58d1c5738709a559d784a8e4429b0c0652",
+    "javascript/.env.example": "a7f0ab2eb32c54b64387c2d3cf6de2819c8791c27d1d47ddab6efb46362b1362"
+  },
+  "business_code_modified": false,
+  "planned_run": "one Python SDK cloud session; JavaScript syntax and dependency inspection only"
+}
