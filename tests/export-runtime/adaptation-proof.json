@@ -1,0 +1,10 @@
+{
+  "business_body_ast_identical_after_removing_instrumentation": true,
+  "viewport": [
+    1920,
+    1080
+  ],
+  "added_screenshot_calls": 5,
+  "original_sha256": "0c58262cee5f222eca5cb8f374a3dd32f8ae904f265c23166e0b92094921406c",
+  "adapted_sha256": "d841fc3baa92db555e74a82b613e188dc994ced6e388240c9aee4bee342a5cca"
+}
