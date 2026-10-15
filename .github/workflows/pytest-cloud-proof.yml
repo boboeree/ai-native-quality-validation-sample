@@ -1,0 +1,48 @@
+name: Pytest cloud proof - controlled failure stays red
+on:
+  push:
+    branches: [qa/pytest-cloud-proof-20261015]
+    paths: [tests/pytest-cloud/**, .github/workflows/pytest-cloud-proof.yml]
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: pytest-cloud-proof
+  cancel-in-progress: false
+jobs:
+  cloud-pytest:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install pinned test dependencies
+        run: python -m pip install -r tests/pytest-cloud/requirements.txt
+      - name: Collect exactly two tests (no cloud session)
+        run: python -m pytest --collect-only tests/pytest-cloud/test_budget.py
+      - name: Run two serial cloud sessions - preserve pytest failure
+        env:
+          LT_USERNAME: ${{ secrets.LT_USERNAME }}
+          LT_ACCESS_KEY: ${{ secrets.LT_ACCESS_KEY }}
+          LT_BUILD: pytest-cloud-${{ github.run_id }}
+        run: python tests/pytest-cloud/run_ci.py
+      - name: Upload evidence even on failure
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: pytest-cloud-evidence-${{ github.run_id }}
+          path: tests/pytest-cloud/artifacts/
+          if-no-files-found: error
+          retention-days: 14
+      - name: Record actual exit code in run summary
+        if: always()
+        run: |
+          echo '## Controlled failure demonstration' >> "$GITHUB_STEP_SUMMARY"
+          echo 'The job remains failed. TC-12 intentionally expects 3 valid Budget cards instead of 2.' >> "$GITHUB_STEP_SUMMARY"
+          echo '```json' >> "$GITHUB_STEP_SUMMARY"
+          cat tests/pytest-cloud/artifacts/exit-code.json >> "$GITHUB_STEP_SUMMARY"
+          echo '```' >> "$GITHUB_STEP_SUMMARY"
