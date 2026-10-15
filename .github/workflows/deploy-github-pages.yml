@@ -31,9 +31,13 @@ jobs:
             echo "allowed=true" >> "$GITHUB_OUTPUT"
             exit 0
           fi
-          # On forks, allow all PR authors
+          # In this demo fork, only run previews from branches owned by this repo.
           if [ "${{ github.repository_owner }}" != "LambdaTest" ]; then
-            echo "allowed=true" >> "$GITHUB_OUTPUT"
+            if [ "${{ github.event.pull_request.head.repo.full_name }}" = "${{ github.repository }}" ]; then
+              echo "allowed=true" >> "$GITHUB_OUTPUT"
+            else
+              echo "allowed=false" >> "$GITHUB_OUTPUT"
+            fi
             exit 0
           fi
           # On upstream, check against allowed list
@@ -65,13 +69,13 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '18'
+          node-version: '22'
           cache: 'npm'
           cache-dependency-path: frontend/package-lock.json
 
       - name: Install dependencies
         working-directory: frontend
-        run: npm install --legacy-peer-deps
+        run: npm ci --legacy-peer-deps
 
       - name: Determine base URL
         id: base
@@ -143,7 +147,7 @@ jobs:
           TARGET="${{ steps.target.outputs.dir }}"
           if [ "$TARGET" = "." ]; then
             # For main: remove all files except pr-* directories and .git
-            find . -maxdepth 1 ! -name '.' ! -name '.git' ! -name 'pr-*' -exec rm -rf {} +
+            find . -maxdepth 1 ! -name '.' ! -name '.git' ! -name '_build' ! -name 'pr-*' -exec rm -rf {} +
             cp -r _build/* .
           else
             rm -rf "$TARGET"
