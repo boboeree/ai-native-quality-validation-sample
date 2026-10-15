@@ -34,7 +34,9 @@ kane-cli testrun run --tags codex-pr1 --parallel 1 --headless --no-adaptive-heal
 
 Run the same command again to verify cached replay. A changed step re-authors
 that step and its following steps; `--no-adaptive-heal` prevents silently
-re-authoring a failing replay. Keep `_test.md` and `output-*/.internal` in Git.
+re-authoring a failing replay. Keep `_test.md` and the complete `output-*` directories in Git, including both
+`Result.md` (step hash/status) and `.internal/` (recordings and TMS identity).
+Omitting Result.md caused a fresh clone to author again during this demo.
 Keep credentials, raw evidence, logs and browser profiles out of Git.
 
 Kane CLI uploads cases and suite results to Test Manager. Git branch/commit/PR

@@ -115,4 +115,3 @@ dist
 # Kane CLI local run artifacts and credentials
 .testmuai/
 *.evidence
-tests/codex-pr1/output-*/Result.md
