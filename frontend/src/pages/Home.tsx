@@ -12,7 +12,7 @@ const categories = [
   { name: 'Villas', icon: '🏛️', filter: { propertyType: 'Villa' } },
   { name: 'Apartments', icon: '🏙️', filter: { propertyType: 'Apartment' } },
   { name: 'Luxury', icon: '✨', filter: { minPrice: 500 } },
-  { name: 'Budget', icon: '🎯', filter: { maxPrice: 300 } },
+  { name: 'Budget', icon: '🎯', filter: { maxPrice: 150 } },
   { name: 'Mountain', icon: '🏔️', filter: { amenities: ['Mountain View'] } },
 ];
 
