@@ -1,0 +1,24 @@
+{
+  "test_id": "23704433-c18a-4572-a704-27a494adf986",
+  "project_id": "01M4Z35ACC422PBAYF8WTX10HF",
+  "folder_id": "01M4Z36KFEZDKWBKS41WJYWFSF",
+  "org_id": "3381254",
+  "session_name": "budget-threshold",
+  "commit_id": "7b7b3bf9-cac6-49a4-bb54-4a05c72ec9e3",
+  "testcase_id": "01M4ZR03D8AWYKZBTZWB1DT510",
+  "executions": [
+    {
+      "execution_id": "cd10630c-0e32-4550-8d19-1a3207fe936f",
+      "run_kind": "author",
+      "status": "passed",
+      "valid": true,
+      "at": "2026-10-15T12:20:25.163Z"
+    },
+    {
+      "execution_id": "d07e79f1-a5af-4967-a67b-c7d5dd07025a",
+      "run_kind": "author",
+      "status": "passed",
+      "at": "2026-10-15T12:22:59.903Z"
+    }
+  ]
+}

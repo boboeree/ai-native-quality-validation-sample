@@ -1,0 +1,36 @@
+{
+  "generator": "Codex (this task), direct PR diff and source inspection",
+  "manual_change_summary_input": false,
+  "pull_request": "https://github.com/boboeree/ai-native-quality-validation-sample/pull/1",
+  "base_sha": "b77e5928f48ea3d2a23e5a7a40b21b00fad73883",
+  "head_sha": "9f74d4896fcc0f94535d762c86a7b459b2fbf368",
+  "preview_url": "https://boboeree.github.io/ai-native-quality-validation-sample/pr-1/",
+  "preview_deployment": "https://github.com/boboeree/ai-native-quality-validation-sample/actions/runs/38691879241",
+  "source_files": [
+    {
+      "path": "frontend/src/pages/Home.tsx",
+      "sha256": "4565a2581a356d3c749a3f635aaaea0ca87ad70169e67235be4d08a586c0499b"
+    },
+    {
+      "path": "frontend/src/services/listingService.ts",
+      "sha256": "70cd1aca6ff74c8a2143a3cedef6e45586eae41ae04a1043110cd957125120eb"
+    },
+    {
+      "path": "frontend/src/services/mock/mockListingService.ts",
+      "sha256": "e01d8489903c5eec50605acf0257a95a02cc73e383e7f13fc50bf62e58dab039"
+    },
+    {
+      "path": "frontend/src/data/mockData.ts",
+      "sha256": "3341beff9b3aec53d91390f64f9b04e210992931deed0316fc5d9df33bfdd18b"
+    },
+    {
+      "path": "frontend/src/components/ListingCard.tsx",
+      "sha256": "3ae55033dc4af1ddcf6abd1f1cc2aad5e7d0e43157062c2c9e6bdbf6ad091022"
+    },
+    {
+      "path": ".github/workflows/deploy-github-pages.yml",
+      "sha256": "c5687bc10a49ed777a70238459f649dc25e792c0cb845ed3ccf5b608974beccd"
+    }
+  ],
+  "cli_version": "0.8.23"
+}
