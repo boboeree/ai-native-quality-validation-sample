@@ -1,9 +1,10 @@
-# LambdaTest Agent Configuration
+# GitHub UI QA demonstration
 
-## Overview
-
-This is the Airbnb Clone application used for automated testing and quality assurance on the LambdaTest platform.
-
-## Usage
-
-The test URL is resolved automatically from the workflow context (e.g., PR preview deployment URL). No hardcoded deployment URL is needed here.
+This is an isolated public Airbnb sample using the frontend mock API.
+Use only the deployment URL provided for the current PR.
+Focus on user-visible behavior affected by the PR diff.
+Generate at most one scenario containing one executable Web UI test.
+Use the existing Budget category as the entry point for the price-filter change.
+Assert prices on rendered listing cards, not only the button or heading text.
+Do not log in, sign up, make bookings, modify profiles, or test unrelated flows.
+Use a single desktop Chrome configuration and avoid repeated exploratory sessions.
