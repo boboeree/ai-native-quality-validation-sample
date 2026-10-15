@@ -1,0 +1,9 @@
+{
+  "code_js": "Array.from(el(0).querySelectorAll('.cursor-pointer.group')).filter(e => e.getClientRects().length > 0).length",
+  "wrapped_js": "(els) => { const el = (i) => els[i]; return Array.from(el(0).querySelectorAll('.cursor-pointer.group')).filter(e => e.getClientRects().length > 0).length; }",
+  "locators": [
+    "div.grid.grid-cols-1"
+  ],
+  "expected": "2",
+  "patch_kind": "Codex local generated test-asset repair; not vendor native AI output"
+}

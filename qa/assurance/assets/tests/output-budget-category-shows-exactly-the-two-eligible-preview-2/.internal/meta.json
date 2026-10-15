@@ -1,0 +1,26 @@
+{
+  "commit_id": "a840a5dd-652c-48d4-98e6-c89bc29625d6",
+  "test_id": "59bf08d9-0e73-47cc-9f32-ec52cd880439",
+  "testcase_id": "01M4ZWWGQ39SS3HZ6M2A0DCKS8",
+  "project_id": "01M4Z35ACC422PBAYF8WTX10HF",
+  "folder_id": "01M4Z36KFEZDKWBKS41WJYWFSF",
+  "org_id": "3381254",
+  "session_name": "assurance-dynamic-card-count",
+  "executions": [
+    {
+      "execution_id": "8568e948-bf25-4433-9cb8-d0908e6b4f7a",
+      "run_kind": "author",
+      "status": "passed",
+      "valid": true,
+      "at": "2026-10-15T16:08:33.691Z"
+    },
+    {
+      "execution_id": "cf4c12a4-51d4-4649-b9cb-9c82910b84f7",
+      "run_kind": "replay",
+      "status": "passed",
+      "valid": true,
+      "uploaded": true,
+      "at": "2026-10-15T16:11:06.349Z"
+    }
+  ]
+}

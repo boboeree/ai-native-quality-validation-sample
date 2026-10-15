@@ -1,0 +1,8 @@
+{
+  "assets/tests/budget-category-shows-exactly-the-two-eligible-preview-2_test.md": "ae592534baa97e5aec24835d305cc63352ec07553f57632e78b1ee48e00a10f9",
+  "assets/tests/output-budget-category-shows-exactly-the-two-eligible-preview-2/.internal/execution.json": "07d2b0f14798e51dd54c2675e9cb71b394ba0b818ebf787827b6c7cf32c3dc49",
+  "assets/tests/output-budget-category-shows-exactly-the-two-eligible-preview-2/.internal/meta.json": "27ce2cff9ab56941fb2289db60fab916ab180cee258e92ff1d7a6ec86a889bb9",
+  "assets/tests/output-budget-category-shows-exactly-the-two-eligible-preview-2/.internal/steps/1-eb5c4989/flows/0/actions.ndjson": "76987e38918e65efdb184aa652dbaa0c06bd0840da525726d70f7a0a668f38a3",
+  "assets/tests/output-budget-category-shows-exactly-the-two-eligible-preview-2/.internal/steps/2-d0d471ed/flows/0/actions.ndjson": "1bbdbee64de3f9fb2ff36caaa442247424e407f5996f149f51f9d012e368a3c0",
+  "assets/tests/output-budget-category-shows-exactly-the-two-eligible-preview-2/.internal/steps/3-44b4cf01/flows/0/actions.ndjson": "54930d8d98006e7eb041efb220081fa94f5dcf9fdfd02145340ce8e08c99e2c4"
+}
