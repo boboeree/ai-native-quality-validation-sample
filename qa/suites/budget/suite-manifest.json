@@ -1,0 +1,6 @@
+{
+  "suite_name": "budget-pr-demo",
+  "runner": "testmu-python",
+  "execution_verified": false,
+  "tests": [{"test_manager_id": "TC-5", "export_version": 1, "entry": "test.py", "known_issue": "Budget filtering assertions were not authored"}]
+}
