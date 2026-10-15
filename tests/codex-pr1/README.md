@@ -42,3 +42,15 @@ Keep credentials, raw evidence, logs and browser profiles out of Git.
 Kane CLI uploads cases and suite results to Test Manager. Git branch/commit/PR
 creation and the PR result comment in this demo are performed by Codex through
 Git/GitHub, not by an implicit Kane CLI Git integration.
+
+## Verified clean-clone result
+
+At suite commit `125337e169af7c0cbf5648e6f913f352ced1bfd4`, both tests passed
+from a new Git clone. All four steps replayed; none authored. Suite time was
+46.711 seconds (50.7 seconds including CLI startup/finalization). The CLI
+uploaded the result to the same Test Manager cases TC-7 and TC-8.
+
+[Execution report](https://test-manager.lambdatest.com/projects/01M4Z35ACC422PBAYF8WTX10HF/test-run/01M4ZRV4SB5WKSFSK3N150W077/evidence?evidenceId=71823596-3723-4ffc-be49-38d6ad1a40d8)
+
+The exported Python file is a TestMu SDK/Playwright artifact; this run executes
+`_test.md` via Kane CLI and does not claim a standalone pytest execution.

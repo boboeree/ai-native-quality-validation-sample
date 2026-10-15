@@ -1,0 +1,63 @@
+{
+  "tested_source_sha": "9f74d4896fcc0f94535d762c86a7b459b2fbf368",
+  "suite_commit": "125337e169af7c0cbf5648e6f913f352ced1bfd4",
+  "process_exit_code": 0,
+  "wall_seconds": 50.7,
+  "members": [
+    {
+      "file": "codex-pr1/budget-threshold_test.md",
+      "status": "passed",
+      "steps": {
+        "total": 1,
+        "passed": 1,
+        "failed": 0,
+        "skipped": 0,
+        "replay_decisions": 1,
+        "author_decisions": 0
+      },
+      "upload": {
+        "performed": true,
+        "succeeded": true
+      }
+    },
+    {
+      "file": "codex-pr1/pagination-reset_test.md",
+      "status": "passed",
+      "steps": {
+        "total": 3,
+        "passed": 3,
+        "failed": 0,
+        "skipped": 0,
+        "replay_decisions": 3,
+        "author_decisions": 0
+      },
+      "upload": {
+        "performed": true,
+        "succeeded": true
+      }
+    }
+  ],
+  "suite": {
+    "type": "testrun_summary",
+    "execution": {
+      "id": "71823596-3723-4ffc-be49-38d6ad1a40d8",
+      "status": "passed",
+      "evidence_id": "71823596-3723-4ffc-be49-38d6ad1a40d8"
+    },
+    "authored": [],
+    "totals": {
+      "tests": 2,
+      "passed": 2,
+      "failed": 0,
+      "broken": 0,
+      "skipped": 0,
+      "authored": 0
+    },
+    "duration_s": 46.711,
+    "upload": "ok",
+    "cancelled": false,
+    "v": 1,
+    "ts": "2026-10-15T12:33:25.517Z"
+  },
+  "report_url": "https://test-manager.lambdatest.com/projects/01M4Z35ACC422PBAYF8WTX10HF/test-run/01M4ZRV4SB5WKSFSK3N150W077/evidence?evidenceId=71823596-3723-4ffc-be49-38d6ad1a40d8"
+}
