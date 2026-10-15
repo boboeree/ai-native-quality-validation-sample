@@ -1,0 +1,48 @@
+name: Repaired Kane export Python and JavaScript
+on:
+  push:
+    branches: [qa/export-boolean-repair-20261015]
+    paths: ['tests/export-repair/**', '.github/workflows/export-repair.yml']
+permissions:
+  contents: read
+jobs:
+  export-repair:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Review preserved assertions and boolean contract diff
+        run: |
+          cat tests/export-repair/repair-proof.json
+          node --check tests/export-repair/javascript/test-repaired.js
+      - name: Install exported SDK versions and local Chromium
+        run: |
+          python -m pip install -r tests/export-repair/python/requirements.txt
+          npm install --prefix tests/export-repair/javascript --ignore-scripts
+          python -m playwright install --with-deps chromium
+      - name: Run repaired Python and JavaScript once each with real PTY capture
+        env:
+          LT_USERNAME: ${{ secrets.LT_USERNAME }}
+          LT_ACCESS_KEY: ${{ secrets.LT_ACCESS_KEY }}
+          TESTMU_RUN_TARGET: local
+          TESTMU_SMART: '1'
+          TESTMU_HEADLESS: 'true'
+          BUILD: export-boolean-repair-${{ github.run_id }}
+        run: python tests/export-repair/run_pair.py
+      - name: Preserve actual execution casts logs and browser screenshots
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: export-boolean-repair-${{ github.run_id }}
+          path: |
+            tests/export-repair/artifacts/
+            tests/export-repair/*-repair.diff
+            tests/export-repair/repair-proof.json
+            tests/export-repair/javascript/package-lock.json
+          retention-days: 7

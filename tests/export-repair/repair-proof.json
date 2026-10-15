@@ -1,0 +1,26 @@
+{
+  "python": {
+    "original_sha256": "0c58262cee5f222eca5cb8f374a3dd32f8ae904f265c23166e0b92094921406c",
+    "repaired_sha256": "1303d4b846c1b35723ea625bc3e83123eac4aaf0492e0a24395b0fca17135f2a",
+    "original_assertions_identical": true,
+    "assertions_count": 3,
+    "steps_count": 14,
+    "expected_values": [
+      "true",
+      "false",
+      "false"
+    ]
+  },
+  "javascript": {
+    "original_sha256": "318d892a867dcdc8a158f46f6de99d1b9ed406e1f80c0ee91a3a05ea17c5332b",
+    "repaired_sha256": "d252f538577eb801bbd6a8d4be2ef0249a8efbb8c3e4ec00c6b43edfd230a455",
+    "original_assertions_identical": true,
+    "assertions_count": 3,
+    "steps_count": 14,
+    "expected_values": [
+      "true",
+      "false",
+      "false"
+    ]
+  }
+}

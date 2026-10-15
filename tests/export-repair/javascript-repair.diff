@@ -1,0 +1,46 @@
+--- javascript/original
++++ javascript/repaired
+@@ -13,6 +13,9 @@
+ });
+ 
+ testmu.test("Verify Property Listings by Price Category", async (page) => {
++  await page.setViewportSize({ width: 1920, height: 1080 });
++  console.log("CODEX_REPAIR viewport=1920x1080; expectedValue propagated; assertions unchanged");
++  try {
+   let element_0, element_1;
+   await testmu.step("Navigate to https://boboeree.github.io/ai-native-quality-validation-sample/pr-1/", { instructionId: "946ff848-6284-4064-8264-a1198de4ff14" }, async () => {
+     await page.goto("https://boboeree.github.io/ai-native-quality-validation-sample/pr-1/");
+@@ -34,15 +37,18 @@
+   });
+   
+   await testmu.step("whether every visible property-card nightly price is at most $150", { instructionId: "ec4cd9f2-695d-45d2-ae92-171c95f7b74c" }, async () => {
+-    setVar("visible_nightly_prices_max_check", await testmu.visionQuery(page, "whether every visible property-card nightly price is at most $150", ""));
++    await page.screenshot({ path: "../artifacts/javascript/vision-before-1.png", fullPage: false });
++    setVar("visible_nightly_prices_max_check", await testmu.visionQuery(page, "whether every visible property-card nightly price is at most $150", { returnType: "", expectedValue: "true" }));
+   });
+   
+   await testmu.step("whether a property priced at $275 per night is visible", { instructionId: "b1c42067-6f8e-414a-92f2-7ab06910a9ff" }, async () => {
+-    setVar("no_275_property_visible_check", await testmu.visionQuery(page, "whether a property priced at $275 per night is visible", ""));
++    await page.screenshot({ path: "../artifacts/javascript/vision-before-2.png", fullPage: false });
++    setVar("no_275_property_visible_check", await testmu.visionQuery(page, "whether a property priced at $275 per night is visible", { returnType: "", expectedValue: "false" }));
+   });
+   
+   await testmu.step("whether a property priced at $280 per night is visible", { instructionId: "87796630-4e98-42ff-9ff1-abd91f12c90e" }, async () => {
+-    setVar("no_280_property_visible_check", await testmu.visionQuery(page, "whether a property priced at $280 per night is visible", ""));
++    await page.screenshot({ path: "../artifacts/javascript/vision-before-3.png", fullPage: false });
++    setVar("no_280_property_visible_check", await testmu.visionQuery(page, "whether a property priced at $280 per night is visible", { returnType: "", expectedValue: "false" }));
+   });
+   
+   await testmu.step("Reading the Scottsdale property card nightly price", async () => {
+@@ -76,6 +82,11 @@
+   await testmu.step("Assertion check", { instructionId: "36eda849-47a0-4e47-aef2-7daba5117e04" }, async () => {
+     await testmu.verifyAssertion(page, "Assertion check", {"operator": ["equals"], "assertion_operands": [], "left_operand": null, "right_operand": null, "operands": [], "sub_results": [{"description": "The result count is greater than two.", "passed": true, "operator": "gt", "transforms": ["extract_number"], "json_path": null, "expected": "2", "extracted_value": "{{result_count_greater_than_two}}", "store_key": "result_count_greater_than_two", "variable_refs": {"{{result_count_greater_than_two}}": "46 total properties(Page 1 of 3)"}}, {"description": "Properties priced above $150 appear again.", "passed": true, "operator": "equals", "transforms": [], "json_path": null, "expected": "true", "extracted_value": "{{properties_above_150_appear_again}}", "store_key": "properties_above_150_appear_again", "variable_refs": {"{{properties_above_150_appear_again}}": "true"}}], "sub_checks": [{"description": "The result count is greater than two.", "store_key": "result_count_greater_than_two", "expected_value": "2", "extracted_value": "{{result_count_greater_than_two}}", "operator": "gt", "transforms": ["extract_number"]}, {"description": "Properties priced above $150 appear again.", "store_key": "properties_above_150_appear_again", "expected_value": "true", "extracted_value": "{{properties_above_150_appear_again}}", "operator": "equals", "transforms": []}], "composite_operator": "and", "claim": "the result count is greater than two, and properties priced above $150 appear again"});
+   });
++  await page.screenshot({ path: "../artifacts/javascript/completed.png", fullPage: false });
++  } catch (error) {
++    await page.screenshot({ path: "../artifacts/javascript/failure.png", fullPage: false });
++    throw error;
++  }
+ });
+ 
+ testmu.run();
