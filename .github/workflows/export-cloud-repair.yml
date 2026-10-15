@@ -1,0 +1,43 @@
+name: Repaired Kane export Windows cloud verification
+on:
+  push:
+    branches: [qa/export-cloud-repair-20261015]
+    paths: ['tests/export-repair/**', '.github/workflows/export-cloud-repair.yml']
+permissions:
+  contents: read
+jobs:
+  export-cloud-repair:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 7
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install original exported Python SDK
+        run: python -m pip install -r tests/export-repair/python/requirements.txt
+      - name: Run single repaired Python test on Windows 10 cloud
+        env:
+          LT_USERNAME: ${{ secrets.LT_USERNAME }}
+          LT_ACCESS_KEY: ${{ secrets.LT_ACCESS_KEY }}
+          TESTMU_RUN_TARGET: cloud
+          TESTMU_SMART: '1'
+          TESTMU_HEADLESS: 'true'
+          LT_PLATFORM: Windows 10
+          LT_BROWSER: Chrome
+          LT_RESOLUTION: 1920x1080
+          IDLE_TIMEOUT: '60'
+          VIDEO: 'true'
+          CONSOLE: 'true'
+          NETWORK: 'false'
+          BUILD: export-cloud-repair-${{ github.run_id }}
+        run: python tests/export-repair/run_cloud_once.py
+      - name: Preserve actual cloud execution evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: export-cloud-repair-${{ github.run_id }}
+          path: |
+            tests/export-repair/artifacts/
+            tests/export-repair/cloud-repair.diff
+          retention-days: 7

@@ -1,0 +1,24 @@
+--- python/test-repaired.py
++++ python/test-cloud.py
+@@ -1,4 +1,6 @@
+ import os
++import json
++from pathlib import Path
+ import testmu
+ from testmu import expect, var, set_var
+ from playwright.async_api import Page
+@@ -18,6 +20,14 @@
+ @testmu.test
+ async def test(page: Page):
+     await page.set_viewport_size({"width": 1920, "height": 1080})
++    try:
++        raw = await page.evaluate("_ => {}", 'lambdatest_action: {"action":"getTestDetails"}')
++        data = json.loads(raw) if isinstance(raw, str) else raw
++        safe = {k: data.get(k) for k in ("test_id", "session_id", "build_id", "status", "name", "browser", "platform") if isinstance(data, dict) and k in data}
++        Path("../artifacts/python/cloud-session.json").write_text(json.dumps(safe, indent=2))
++        print("CLOUD_SESSION_METADATA", json.dumps(safe), flush=True)
++    except Exception as exc:
++        print("CLOUD_SESSION_METADATA_UNAVAILABLE", type(exc).__name__, flush=True)
+     print("CODEX_REPAIR viewport=1920x1080; boolean expected_value propagated; assertions unchanged", flush=True)
+     try:
+         async with testmu.step('Navigate to https://boboeree.github.io/ai-native-quality-validation-sample/pr-1/', instruction_id='946ff848-6284-4064-8264-a1198de4ff14'):
