@@ -1,0 +1,40 @@
+name: Original Kane export local smart proof
+on:
+  push:
+    branches: [qa/export-local-smart-proof-20261015]
+    paths:
+      - 'tests/export-runtime/**'
+      - '.github/workflows/export-local-smart-proof.yml'
+permissions:
+  contents: read
+jobs:
+  exported-python-local-smart:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Inspect original export
+        run: python tests/export-runtime/audit.py
+      - name: Install original dependencies and local Chromium
+        run: |
+          python -m pip install -r tests/export-runtime/python/requirements.txt
+          python -m playwright install --with-deps chromium
+      - name: Execute original code once in local browser with smart AI
+        env:
+          LT_USERNAME: ${{ secrets.LT_USERNAME }}
+          LT_ACCESS_KEY: ${{ secrets.LT_ACCESS_KEY }}
+          TESTMU_RUN_TARGET: local
+          TESTMU_SMART: '1'
+          TESTMU_HEADLESS: 'true'
+          BUILD: export-local-smart-${{ github.run_id }}
+        run: python tests/export-runtime/run_local_once.py
+      - name: Preserve sanitized runtime evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: original-export-local-smart-${{ github.run_id }}
+          path: tests/export-runtime/artifacts/
+          retention-days: 7
