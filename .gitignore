@@ -111,3 +111,8 @@ dist
 # package-lock.json
 # yarn.lock
 # pnpm-lock.yaml
+
+# Kane CLI local run artifacts and credentials
+.testmuai/
+*.evidence
+tests/codex-pr1/output-*/Result.md
